@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>News</title>
+    </head>
+    <body>
+        <h2>Hyper news</h2>
+
+        {% for item in news %}
+        <h4>{{ item.date }}</h4>
+        <ul>
+        {% for item_2 in item.values %}
+        <li><a target="_blank" href="/news/{{ item_2.link }}/">{{ item_2.title }}</a> </li>
+        {% endfor %}
+        </ul>
+        {% endfor %}
+    <a target="_blank" href="/news/create/">Add news</a>
+    </body>
+</html>
