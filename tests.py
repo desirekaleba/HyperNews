@@ -16,6 +16,12 @@ class HyperNewsTestRunner(HyperNewsTest):
         HyperNewsTest.check_main_header,
         HyperNewsTest.check_main_page,
         HyperNewsTest.check_main_page_create_link,
+        # 4 task
+        HyperNewsTest.check_creating_news,
+        HyperNewsTest.check_create_page_main_link,
+        # 5 task
+        HyperNewsTest.check_main_page_search,
+        HyperNewsTest.check_coming_soon_page_redirect,
     ]
 
     @dynamic_test(data=funcs)

@@ -2,10 +2,11 @@
 import copy
 import http.cookiejar
 import json
+import os
 import re
 import urllib
 from datetime import datetime
-import os
+
 from hstest import CheckResult, DjangoTest
 
 
