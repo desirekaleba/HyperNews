@@ -6,6 +6,8 @@ import itertools
 from datetime import datetime
 import random
 
+news = []
+
 
 # Create your views here.
 def load_json_file():
@@ -23,13 +25,32 @@ def dump_json_file():
         json.dump(news, json_file)
 
 
+def search_news(phrase):
+    searched_news = []
+    for i in news:
+        if phrase in i.get("title"):
+            searched_news.append(i)
+    return searched_news
+
+
+def sort_news(_news):
+    _news.sort(key=lambda x: x['created'], reverse=True)
+    sorted_news = [{'date': date, 'values': list(news)} for date, news in
+                   itertools.groupby(_news, lambda x: simple_date_fun(x['created']))]
+    return sorted_news
+
+
 class NewsView(View):
     def get(self, request, *args, **kwargs):
+        search = request.GET.get('q')
         load_json_file()
-        news.sort(key=lambda x: x['created'], reverse=True)
-        sorted_news = [{'date': date, 'values': list(news)} for date, news in
-                       itertools.groupby(news, lambda x: simple_date_fun(x['created']))]
+        sorted_news = sort_news(news)
         context = {'news': sorted_news}
+
+        if search:
+            searched_news = search_news(search)
+            sorted_searched_news = sort_news(searched_news)
+            context['news'] = sorted_searched_news
         return render(request, 'news/news.html', context=context)
 
 

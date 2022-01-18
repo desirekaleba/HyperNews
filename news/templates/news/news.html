@@ -2,10 +2,15 @@
 <html>
     <head>
         <title>News</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     </head>
     <body>
         <h2>Hyper news</h2>
-
+        <form action="/news/" method="get">
+            <input type="text" id="search" name="q" placeholder="Search..">
+        </form>
         {% for item in news %}
         <h4>{{ item.date }}</h4>
         <ul>
